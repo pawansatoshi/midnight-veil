@@ -1,35 +1,62 @@
-# Veil — Privacy-Preserving Access Proofs
+# Veil — Privacy-Preserving Credentials
 
-Veil is a Midnight-native privacy product for proving eligibility without exposing the underlying personal data.
-
-## Hackathon target
-
-Primary target: Midnight / Brainwave 2026 Midnight Track. The track requires a full-stack application using Midnight meaningfully, a smart contract deployed on Midnight Preview or Preprod, a working demonstration, and clear documentation.
+Veil is a Midnight-native privacy-credential product for proving eligibility without repeatedly exposing the underlying personal data.
 
 ## Product thesis
 
-Most eligibility workflows ask for the data behind an answer. Veil flips that model: keep the sensitive profile private and publish only the minimum verifiable outcome.
+Most eligibility workflows ask for the data behind an answer. Veil flips that model: a verifier asks for a precise claim, the user proves it from private credentials, and the verifier receives only the minimum permitted result.
 
-## Core demo
+> **Prove the claim. Keep the data.**
 
-1. Connect a Midnight wallet.
-2. Create a private eligibility profile locally.
-3. Choose a proof policy such as age, income, residency, or risk threshold.
-4. Generate a privacy-preserving proof.
-5. Publish only the verification result / commitment.
-6. Let a verifier inspect proof status without receiving the underlying profile.
-7. Revoke the proof when it is no longer valid.
+## Complete product journey
+
+`Verifier request → Private credential → Policy → Private computation → ZK proof → Midnight verification → Minimal disclosure → Reuse → Expiry / revocation`
+
+The repository is being built as a complete product, not a landing page or visual-only demo.
+
+## Hackathon target
+
+Primary target: Brainwave 2026 — Midnight Track. The currently published track requires a full-stack application using the Midnight ecosystem meaningfully, a smart contract deployed on Midnight Preview or PreProd, a working demonstration, and clear documentation. The current published deadline is Aug 27, 2026 at 7:00 AM IST. citeturn0search1
+
+## Product surfaces
+
+### User / prover
+- Private credential profile
+- Eligibility policy selection
+- Proof preparation
+- Proof status
+- Expiry / revocation state
+- Privacy explanation
+
+### Verifier
+- Create a precise verification request
+- Request only the required predicate
+- Inspect verification status
+- See minimal permitted claim metadata
+- Distinguish valid / expired / revoked / unknown
+
+### Midnight layer
+- Compact smart contract
+- Private inputs and public state separation
+- ZK proof generation
+- Wallet/DApp integration
+- Preview/PreProd deployment
+- Real transaction and state verification
+
+## Current implementation status
+
+The repository currently contains the product foundation, responsive UI, verifier workflow foundation, Compact contract boundary, roadmap, architecture and CI/test scaffolding.
+
+**Important:** the current browser UI does not claim a fake Midnight wallet connection, fake ZK proof, fake transaction, or fake on-chain verification. Local proof references are explicitly labeled as previews until the real Midnight toolchain is connected.
+
+Real network deployment, generated Compact artifacts, wallet integration and on-chain verification remain engineering gates, not claims of completion.
 
 ## Repository structure
 
-- `app/` — responsive product UI
+- `app/` — responsive product UI and verifier workflow
 - `contracts/` — Compact smart-contract source
-- `docs/` — product, architecture, privacy and verification documentation
+- `docs/` — architecture, roadmap and verification checklist
 - `.github/workflows/` — CI
-
-## Current status
-
-The product foundation and privacy-first UX are implemented. The Compact contract is included as the canonical on-chain boundary. Network deployment and generated Compact artifacts require the current Midnight toolchain, wallet, proof server and a funded Preview/Preprod account; these are intentionally not fabricated in source control.
 
 ## Development
 
@@ -39,19 +66,24 @@ The UI is a dependency-light Vite application. Install Node.js 22+, then:
 npm install
 npm run dev
 npm run build
-npm run test
+npm test
 ```
 
-For Midnight contract work, use the current Compact toolchain documented by Midnight and regenerate managed artifacts before attempting a network deployment.
+For Midnight contract work, use the current official compatibility matrix and documentation, compile the Compact source, generate managed artifacts, and integrate the generated contract/prover/verifier interfaces before attempting network deployment. Midnight's current documentation identifies Compact, ZK proofs, selective disclosure and DApp development as core parts of the developer workflow. citeturn0search0
 
 ## Security principles
 
 - Never store raw identity/profile data on-chain.
 - Never place wallet seeds or secrets in frontend code.
-- Treat proofs and commitments as scoped credentials, not permanent identity identifiers.
+- Treat proofs and commitments as scoped credentials rather than permanent identity identifiers.
 - Keep sensitive profile state local/private.
 - Make disclosure explicit and minimal.
+- Never represent simulated blockchain state as real state.
 
 ## Verification status
 
-No production deployment or on-chain contract address is claimed until it has been independently verified on the target Midnight network.
+No contract address, transaction hash, network deployment, ZK proof or wallet connection is claimed as real until independently verified on the target Midnight network.
+
+## Completion standard
+
+Veil is GREEN only when the complete user + verifier journey works with real Midnight integration and the applicable security, accessibility, responsive, performance, CI, deployment and clean-room verification gates pass.
