@@ -1,0 +1,27 @@
+pragma language_version 0.20;
+
+import CompactStandardLibrary;
+
+// Veil stores only a privacy-preserving commitment and the public verification outcome.
+// Sensitive eligibility attributes are supplied as private circuit inputs and are never
+// written to the public ledger.
+export ledger verifiedClaims: Map<Bytes<32>, Boolean>;
+
+export circuit proveAge(commitment: Bytes<32>, age: Uint<16>, minimumAge: Uint<16>): [] {
+  assert(age >= minimumAge, "age policy not satisfied");
+  verifiedClaims.insert(disclose(commitment), true);
+}
+
+export circuit proveIncome(commitment: Bytes<32>, income: Uint<64>, minimumIncome: Uint<64>): [] {
+  assert(income >= minimumIncome, "income policy not satisfied");
+  verifiedClaims.insert(disclose(commitment), true);
+}
+
+export circuit proveResidency(commitment: Bytes<32>, residencyCommitment: Bytes<32>, allowedCommitment: Bytes<32>): [] {
+  assert(residencyCommitment == allowedCommitment, "residency policy not satisfied");
+  verifiedClaims.insert(disclose(commitment), true);
+}
+
+export circuit revoke(commitment: Bytes<32>): [] {
+  verifiedClaims.insert(disclose(commitment), false);
+}
