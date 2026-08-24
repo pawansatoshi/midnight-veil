@@ -16,7 +16,7 @@ The repository is being built as a complete product, not a landing page or visua
 
 ## Hackathon target
 
-Primary target: Brainwave 2026 — Midnight Track. The currently published track requires a full-stack application using the Midnight ecosystem meaningfully, a smart contract deployed on Midnight Preview or PreProd, a working demonstration, and clear documentation. The current published deadline is Aug 27, 2026 at 7:00 AM IST. citeturn0search1
+Primary target: Brainwave 2026 — Midnight Track. The published track requires a full-stack application using the Midnight ecosystem meaningfully, a smart contract deployed on Midnight Preview or PreProd, a working demonstration, and clear documentation. Verify the current Devpost deadline and rules immediately before submission.
 
 ## Product surfaces
 
@@ -69,7 +69,7 @@ npm run build
 npm test
 ```
 
-For Midnight contract work, use the current official compatibility matrix and documentation, compile the Compact source, generate managed artifacts, and integrate the generated contract/prover/verifier interfaces before attempting network deployment. Midnight's current documentation identifies Compact, ZK proofs, selective disclosure and DApp development as core parts of the developer workflow. citeturn0search0
+For Midnight contract work, use the current official compatibility matrix and documentation, compile the Compact source, generate managed artifacts, and integrate the generated contract/prover/verifier interfaces before attempting network deployment.
 
 ## Security principles
 
